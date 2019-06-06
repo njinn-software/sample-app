@@ -17,7 +17,7 @@ DESCRIPTION = 'Njinn Sample Application'
 AUTHOR = 'Njinn Technologies GmbH'
 EMAIL = 'contact@njinn.io'
 REQUIRES_PYTHON = '>=3.7'
-VERSION = '0.1.0'
+VERSION = '0.1.2'
 REQUIRED = []
 EXTRAS = {}
 
@@ -43,7 +43,10 @@ class UploadCommand(Command):
     """Support setup.py upload."""
 
     description = 'Build and publish the package.'
-    user_options = []
+    user_options = [
+        ('username=', None, 'Specify the username for PyPi.'),
+        ('password=', None, 'Password to authenticate the user.'),
+    ]
 
     @staticmethod
     def status(s):
@@ -51,10 +54,12 @@ class UploadCommand(Command):
         print('\033[1m{0}\033[0m'.format(s))
 
     def initialize_options(self):
-        pass
+        self.username = None
+        self.password = None
 
     def finalize_options(self):
-        pass
+        assert self.username, 'Invalid username!'
+        assert self.password, 'Invalid password!'
 
     def run(self):
         try:
@@ -67,7 +72,7 @@ class UploadCommand(Command):
         os.system('{0} setup.py sdist bdist_wheel'.format(sys.executable))
 
         self.status('Uploading the package to PyPI via Twine…')
-        os.system('twine upload --repository-url https://test.pypi.org/legacy/ dist/*')
+        os.system('twine upload --repository-url https://test.pypi.org/legacy/ -u {0} -p {1} dist/*'.format(self.username, self.password))
 
         self.status('Pushing git tags…')
         os.system('git tag v{0}'.format(about['__version__']))
