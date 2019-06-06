@@ -17,7 +17,7 @@ DESCRIPTION = 'Njinn Sample Application'
 AUTHOR = 'Njinn Technologies GmbH'
 EMAIL = 'contact@njinn.io'
 REQUIRES_PYTHON = '>=3.7'
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 REQUIRED = []
 EXTRAS = {}
 
@@ -51,7 +51,7 @@ class UploadCommand(Command):
     @staticmethod
     def status(s):
         """Prints things in bold."""
-        print('\033[1m{0}\033[0m'.format(s))
+        print(s)
 
     def initialize_options(self):
         self.username = None
