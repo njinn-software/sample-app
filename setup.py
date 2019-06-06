@@ -17,7 +17,7 @@ DESCRIPTION = 'Njinn Sample Application'
 AUTHOR = 'Njinn Technologies GmbH'
 EMAIL = 'contact@njinn.io'
 REQUIRES_PYTHON = '>=3.7'
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 REQUIRED = []
 EXTRAS = {}
 
